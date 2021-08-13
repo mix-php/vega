@@ -92,6 +92,8 @@ class Engine
             } elseif ($_SERVER['SCRIPT_NAME'] == '/index.php') {
                 $uri = '/';
             }
+        } elseif (PHP_SAPI == 'fpm-fcgi') {
+            $uri = $_SERVER['REQUEST_URI'] ?? '/';
         }
         $this->dispatch($_SERVER['REQUEST_METHOD'], $uri, $ctx);
 
